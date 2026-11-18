@@ -30,17 +30,34 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            when {
-                expression {
-                    return params.RUN_TESTS
+        
+    stage('Tests') {
+        when {
+            expression {
+                return params.RUN_TESTS
+            }
+        }
+
+        parallel {
+
+            stage('Unit Tests') {
+                steps {
+                    echo 'Running unit tests...'
+                    sleep(time: 10, unit: 'SECONDS')
+                    echo 'Unit tests completed!'
                 }
             }
 
-            steps {
-                echo 'Running tests...'
+            stage('Integration Tests') {
+                steps {
+                    echo 'Running integration tests...'
+                    sleep(time: 15, unit: 'SECONDS')
+                    echo 'Integration tests completed!'
+                }
             }
         }
+    }
+
 
         stage('Deploy') {
             steps {
