@@ -15,7 +15,7 @@ pipeline {
                 echo 'Running tests...'
 
                 // Intentional failure for the exercise
-                error('This stage fails intentionally!')
+                //error('This stage fails intentionally!')
             }
         }
 
