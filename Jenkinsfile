@@ -1,7 +1,9 @@
 
 pipeline {
     agent any
-
+    triggers {
+        pollSCM('H/5 * * * *')
+    }
     parameters {
         // Text parameter
         string(name: 'ENV', defaultValue: 'dev',
@@ -43,7 +45,7 @@ pipeline {
             stage('Unit Tests') {
                 steps {
                     echo 'Running unit tests...'
-                    sleep(time: 10, unit: 'SECONDS')
+                    sleep(time: 3, unit: 'SECONDS')
                     echo 'Unit tests completed!'
                 }
             }
@@ -51,7 +53,7 @@ pipeline {
             stage('Integration Tests') {
                 steps {
                     echo 'Running integration tests...'
-                    sleep(time: 15, unit: 'SECONDS')
+                    sleep(time: 5, unit: 'SECONDS')
                     echo 'Integration tests completed!'
                 }
             }
